@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beauty Potal - サロン管理</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold gradient-text">Beauty Potal</h1>
+            <div id="auth-links" class="flex items-center space-x-4">
+                <!-- ログイン状態に応じて変化するエリア -->
+            </div>
+        </nav>
+    </header>
+
+    <div id="app-root">
+        <!-- Logged Out View (Landing Page) -->
+        <main id="landing-page-view">
+            <!-- Hero Section -->
+            <section class="py-20 bg-white">
+                <div class="container mx-auto px-6 text-center">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                        サロン運営のすべてを、<span class="gradient-text">シンプル</span>に。
+                    </h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+                        Beauty Potalは、予約管理から顧客とのコミュニケーションまで、美容サロン経営のあらゆる業務を一つのプラットフォームで完結させるためのオールインワン・ソリューションです。
+                    </p>
+                    <div class="flex justify-center space-x-4">
+                        <button id="cta-salon-signup" class="bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold px-8 py-3 rounded-lg hover:opacity-90 transition-opacity shadow-lg text-lg">
+                            無料で始める
+                        </button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Features and Pricing Sections -->
+            <section id="features" class="py-20 bg-white">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-12">
+                        <h3 class="text-3xl font-bold">サロン運営を加速させる多彩な機能</h3>
+                        <p class="text-gray-600 mt-2">必要な機能はすべてここに。業務効率を最大化します。</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="bg-gray-50 p-6 rounded-lg feature-card border border-gray-200">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-full bg-purple-100 text-purple-600 mb-4"><i data-lucide="calendar"></i></div>
+                            <h4 class="text-xl font-semibold mb-2">スマート予約管理</h4>
+                            <p class="text-gray-600">オンライン予約を24時間自動受付。ダブルブッキングを防ぎ、スケジュール管理を効率化します。</p>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-lg feature-card border border-gray-200">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-full bg-pink-100 text-pink-600 mb-4"><i data-lucide="users"></i></div>
+                            <h4 class="text-xl font-semibold mb-2">パワフルな顧客管理</h4>
+                            <p class="text-gray-600">来店履歴や施術メモ、好みなどを一元管理。お客様一人ひとりに合わせた最適な接客を実現します。</p>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-lg feature-card border border-gray-200">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600 mb-4"><i data-lucide="ticket"></i></div>
+                            <h4 class="text-xl font-semibold mb-2">クーポン・販促機能</h4>
+                            <p class="text-gray-600">再来店を促すクーポンを簡単に発行・配信。お客様のロイヤリティを高めます。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="pricing" class="py-20">
+                 <div class="container mx-auto px-6 text-center">
+                     <h3 class="text-3xl font-bold mb-4">あなたに合ったプランを</h3>
+                     <p class="text-gray-600 max-w-xl mx-auto mb-12">初期費用0円。まずは無料プランからお試しいただけます。</p>
+                 </div>
+            </section>
+        </main>
+
+        <!-- Salon Setup View -->
+        <section id="salon-setup-view" class="py-16 hidden">
+            <div class="container mx-auto px-6 max-w-2xl">
+                <div class="bg-white p-8 rounded-2xl shadow-2xl border border-gray-200">
+                    <h3 class="text-2xl font-bold text-center mb-2">サロン情報の登録</h3>
+                    <p class="text-center text-gray-600 mb-8">ようこそ！まずはあなたのサロン情報を登録してください。</p>
+                    <form id="salon-setup-form">
+                        <div class="mb-4">
+                            <label for="salon-name" class="block text-gray-700 mb-2">サロン名</label>
+                            <input type="text" id="salon-name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                        </div>
+                        <div class="mb-6">
+                            <label for="salon-address" class="block text-gray-700 mb-2">住所</label>
+                            <input type="text" id="salon-address" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                        </div>
+                        <button type="submit" class="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition font-semibold text-lg">登録してダッシュボードへ</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Logged In View (Dashboard) -->
+        <section id="dashboard-view" class="py-16 hidden">
+             <div class="container mx-auto px-6">
+                 <h3 id="welcome-message" class="text-3xl font-bold text-center mb-12"></h3>
+                <div class="bg-white p-4 sm:p-6 md:p-8 rounded-2xl shadow-2xl border border-gray-200">
+                    
+                    <!-- Salon Dashboard View -->
+                    <div id="salon-view">
+                        <h4 class="text-2xl font-bold mb-6 border-b pb-4">メニュー設定</h4>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                            <!-- Menu Add Form -->
+                            <div>
+                                <h5 class="text-xl font-semibold mb-4">新しいメニューを追加</h5>
+                                <form id="add-menu-form" class="bg-gray-50 p-6 rounded-lg border">
+                                    <div class="mb-4">
+                                        <label for="menu-name" class="block text-sm font-medium text-gray-700 mb-1">メニュー名</label>
+                                        <input type="text" id="menu-name" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="menu-price" class="block text-sm font-medium text-gray-700 mb-1">価格 (円)</label>
+                                        <input type="number" id="menu-price" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                                    </div>
+                                    <button type="submit" class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition font-semibold">追加する</button>
+                                </form>
+                            </div>
+                            <!-- Menu List -->
+                            <div>
+                                <h5 class="text-xl font-semibold mb-4">登録済みメニュー</h5>
+                                <div id="menu-list" class="space-y-3">
+                                    <!-- メニューリストがここに動的に挿入されます -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modals -->
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+        <div class="modal-content bg-white rounded-lg shadow-xl p-8 w-full max-w-md transform scale-95">
+            <button id="close-login-modal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800">
+                <i data-lucide="x"></i>
+            </button>
+            <h2 class="text-2xl font-bold mb-6 text-center">サロンオーナー様ログイン</h2>
+            <form id="login-form">
+                <div class="mb-4">
+                    <label for="login-email" class="block text-gray-700 mb-2">メールアドレス</label>
+                    <input type="email" id="login-email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                </div>
+                <div class="mb-6">
+                    <label for="login-password" class="block text-gray-700 mb-2">パスワード</label>
+                    <input type="password" id="login-password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                </div>
+                <button type="submit" class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition font-semibold">ログイン</button>
+            </form>
+            <p id="login-error" class="text-red-500 text-sm mt-4 text-center"></p>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signup-modal" class="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+        <div class="modal-content bg-white rounded-lg shadow-xl p-8 w-full max-w-md transform scale-95">
+            <button id="close-signup-modal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800">
+                <i data-lucide="x"></i>
+            </button>
+            <h2 class="text-2xl font-bold mb-6 text-center">サロンオーナー様 新規登録</h2>
+            <form id="signup-form">
+                <div class="mb-4">
+                    <label for="signup-email" class="block text-gray-700 mb-2">メールアドレス</label>
+                    <input type="email" id="signup-email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                </div>
+                <div class="mb-6">
+                    <label for="signup-password" class="block text-gray-700 mb-2">パスワード (6文字以上)</label>
+                    <input type="password" id="signup-password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                </div>
+                <button type="submit" class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition font-semibold">登録する</button>
+            </form>
+            <p id="signup-error" class="text-red-500 text-sm mt-4 text-center"></p>
+        </div>
+    </div>
+
+    <!-- Development View Switcher -->
+    <div id="dev-switcher" class="fixed bottom-4 left-4 bg-gray-800 text-white p-3 rounded-lg shadow-lg z-50 opacity-80 hover:opacity-100 transition-opacity">
+        <h4 class="font-bold text-sm border-b border-gray-600 pb-1 mb-2">開発用スイッチャー</h4>
+        <div class="flex flex-col space-y-2">
+            <button data-mode="logged_out" class="dev-btn text-xs bg-gray-600 hover:bg-gray-500 rounded px-2 py-1">未ログイン</button>
+            <button data-mode="salon_setup" class="dev-btn text-xs bg-teal-600 hover:bg-teal-500 rounded px-2 py-1">サロン情報登録</button>
+            <button data-mode="salon_dashboard" class="dev-btn text-xs bg-sky-600 hover:bg-sky-500 rounded px-2 py-1">サロンDashboard</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-10">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Beauty Potal. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="app.js"></script>
+    <script>
+        // グローバルスコープに関数を配置
+        // このファイルでは不要になったため空にしておきます
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beauty Potal - サロンページ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', 'Noto Sans JP', sans-serif; background-color: #F8F9FA; }
+        .nav-btn.active { border-top-color: #8B5CF6; }
+        .sticky-col { position: sticky; left: 0; z-index: 10; }
+        .has-\[:checked\]\:border-purple-500:has(:checked) { border-color: #8B5CF6; }
+        .has-\[:checked\]\:bg-purple-50:has(:checked) { background-color: #F5F3FF; }
+        /* スクロールバーのスタイル（オプション） */
+        #booking-calendar-wrapper::-webkit-scrollbar { height: 4px; }
+        #booking-calendar-wrapper::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 2px; }
+        #booking-calendar-wrapper::-webkit-scrollbar-track { background: #f1f5f9; }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Main Content Header -->
+    <header id="main-header" class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-40">
+        <div class="container mx-auto px-4 py-3">
+            <h1 id="salon-name-header" class="text-xl font-bold text-center truncate"></h1>
+        </div>
+    </header>
+
+    <!-- Reservation Flow Header -->
+    <header id="reservation-header" class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-40 hidden">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <button id="back-to-main-view-btn" class="text-gray-600 hover:text-purple-600">
+                <i data-lucide="x"></i>
+            </button>
+            <h1 id="reservation-step-title" class="text-xl font-bold absolute left-1/2 -translate-x-1/2"></h1>
+            <div class="w-8"></div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main id="main-content-container" class="pb-24">
+        <div id="content-wrapper">
+             <!-- Salon Info View -->
+            <section id="salon-info-view" class="p-4"></section>
+
+            <!-- Menu View -->
+            <section id="menu-view" class="p-4 space-y-4 hidden">
+                <h3 class="text-xl font-bold">メニュー</h3>
+                <div id="menu-list-container" class="space-y-4"></div>
+            </section>
+            
+            <!-- Ticket View -->
+            <section id="ticket-view" class="p-4 space-y-4 hidden">
+                 <h3 class="text-xl font-bold">保有回数券</h3>
+                 <div id="ticket-list-container" class="space-y-4"></div>
+            </section>
+
+            <!-- History View -->
+            <section id="history-view" class="p-4 space-y-4 hidden">
+                <h3 class="text-xl font-bold">予約履歴</h3>
+                <div id="history-list-container" class="space-y-4"></div>
+            </section>
+
+            <!-- Coupon View -->
+            <section id="coupon-view" class="p-4 space-y-4 hidden">
+                <h3 class="text-xl font-bold">クーポン</h3>
+                <div id="coupon-list-container" class="space-y-4"></div>
+            </section>
+        </div>
+        <div id="bottom-padding"></div>
+    </main>
+
+    <!-- Reservation Flow Content Area -->
+    <main id="reservation-flow-container" class="hidden pb-24">
+        <!-- Options View -->
+        <section id="options-view" class="p-4 space-y-4 hidden">
+            <div id="options-list-container" class="space-y-3"></div>
+        </section>
+
+        <!-- Staff Selection View -->
+        <section id="staff-view" class="p-4 space-y-4 hidden">
+            <div id="staff-list-container" class="space-y-3"></div>
+        </section>
+
+        <!-- Datetime Selection View -->
+        <section id="datetime-view" class="hidden">
+            <div id="calendar-nav" class="flex items-center justify-between p-2 bg-white sticky top-16 z-30">
+                <button class="p-2 text-gray-500 hover:text-purple-600"><i data-lucide="chevron-left"></i></button>
+                <h4 id="calendar-month" class="font-semibold"></h4>
+                <button class="p-2 text-gray-500 hover:text-purple-600"><i data-lucide="chevron-right"></i></button>
+            </div>
+            <div id="booking-calendar-wrapper" class="overflow-x-auto">
+                <div id="booking-calendar-container"></div>
+            </div>
+        </section>
+
+        <!-- Confirmation View -->
+        <section id="confirmation-view" class="p-4 hidden">
+            <div id="confirmation-details" class="bg-white p-4 rounded-lg border"></div>
+        </section>
+        
+        <!-- Booking Complete View -->
+        <section id="booking-complete-view" class="hidden h-screen flex flex-col items-center justify-center text-center p-4 bg-white">
+            <div class="flex items-center justify-center w-20 h-20 bg-green-100 rounded-full mb-6">
+                <i data-lucide="check" class="w-12 h-12 text-green-600"></i>
+            </div>
+            <h2 class="text-2xl font-bold mb-2">予約が完了しました</h2>
+            <p class="text-gray-600 mb-8">ご来店を心よりお待ちしております。</p>
+            <button id="close-booking-complete-btn" class="bg-purple-600 text-white font-semibold py-3 px-8 rounded-lg w-full max-w-xs">ページに戻る</button>
+        </section>
+    </main>
+
+    <!-- Reservation Flow Footer -->
+    <footer id="reservation-footer" class="bg-white/90 backdrop-blur-md border-t fixed bottom-0 left-0 w-full p-4 z-40 hidden">
+        <button id="to-staff-selection-btn" class="w-full bg-purple-600 text-white font-semibold py-3 rounded-lg hover:bg-purple-700 transition hidden">担当者選択へ</button>
+        <button id="to-datetime-selection-btn" class="w-full bg-purple-600 text-white font-semibold py-3 rounded-lg hover:bg-purple-700 transition hidden">日時選択へ</button>
+        <button id="to-confirmation-btn" class="w-full bg-purple-600 text-white font-semibold py-3 rounded-lg hover:bg-purple-700 transition hidden">予約内容の確認へ</button>
+        <button id="submit-booking-btn" class="w-full bg-purple-600 text-white font-semibold py-3 rounded-lg hover:bg-purple-700 transition hidden">予約を確定する</button>
+    </footer>
+
+    <!-- Main Footer Navigation -->
+    <footer id="bottom-nav" class="bg-white border-t fixed bottom-0 left-0 w-full z-40">
+        <div class="grid grid-cols-5 text-center">
+            <button data-tab="salon-info" class="nav-btn text-gray-500 py-2 border-t-2 border-transparent">
+                <i data-lucide="home" class="mx-auto w-6 h-6"></i>
+                <span class="text-xs">サロン情報</span>
+            </button>
+            <button data-tab="menu" class="nav-btn text-gray-500 py-2 border-t-2 border-transparent">
+                <i data-lucide="book-marked" class="mx-auto w-6 h-6"></i>
+                <span class="text-xs">メニュー</span>
+            </button>
+            <button data-tab="ticket" class="nav-btn text-gray-500 py-2 border-t-2 border-transparent">
+                <i data-lucide="ticket" class="mx-auto w-6 h-6"></i>
+                <span class="text-xs">回数券</span>
+            </button>
+            <button data-tab="history" class="nav-btn text-gray-500 py-2 border-t-2 border-transparent">
+                <i data-lucide="history" class="mx-auto w-6 h-6"></i>
+                <span class="text-xs">履歴</span>
+            </button>
+            <button data-tab="coupon" class="nav-btn text-gray-500 py-2 border-t-2 border-transparent">
+                <i data-lucide="tag" class="mx-auto w-6 h-6"></i>
+                <span class="text-xs">クーポン</span>
+            </button>
+        </div>
+    </footer>
+
+    <script src="./customer-app.js"></script>
+</body>
+</html>
+
