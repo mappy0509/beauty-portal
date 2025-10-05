@@ -1,0 +1,19 @@
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyBR367KAMmI8IcXOSWar4ILMxboKpaKH4Q",
+    authDomain: "beauty-portal-c2e44.firebaseapp.com",
+    projectId: "beauty-portal-c2e44",
+    storageBucket: "beauty-portal-c2e44.firebasestorage.app",
+    messagingSenderId: "6749240171",
+    appId: "1:6749240171:web:64caf9771ddc76da936a2e"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script>
